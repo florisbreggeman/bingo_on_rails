@@ -1,0 +1,23 @@
+<div id='main'>
+<h1><%= @card.name %></h1>
+<p>Created at: <%= @card.created_at %>. Updated at: <%= @card.created_at %></p>
+
+<% if @complete %>
+  <table class='card'>
+    <tbody>
+      <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+      <tr><% @contents[0,5].each do |content| %><%= raw(content) %><% end %></tr>
+      <tr><% @contents[5,5].each do |content| %><%= raw(content) %><% end %></tr>
+      <tr>
+        <% @contents[10,2].each do |content| %><%= raw(content) %><% end %>
+        <td class="free_space">Free Space!<br/><%= @card.free_space %></td> 
+        <% @contents[12,2].each do |content| %><%= raw(content) %><% end %>
+      </tr>
+      <tr><% @contents[14,5].each do |content| %><%= raw(content) %><% end %></tr>
+      <tr><% @contents[19,5].each do |content| %><%= raw(content) %><% end %></tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>Sorry, this Bingo card is not yet complete</p>
+<% end %>
+</div>

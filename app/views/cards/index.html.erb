@@ -1,0 +1,10 @@
+<div id='main'>
+<h1>Welcome to my Bingo Website</h1>
+<p>Currently available bingo cards:</p>
+<ul>
+  <% @cards.each do |card| %>
+    <li><a href="/card/<%= card.id %>"><%= card.name %></a></li>
+  <% end %>
+</ul>
+</div>
+
