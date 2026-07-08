@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   root "cards#index"
 
   get "/card/:id", controller: "cards", action: :show
+  get "/login", controller: "sessions", action: :login
+  post "/login", controller: "sessions", action: :create
 end

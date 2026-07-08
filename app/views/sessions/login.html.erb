@@ -1,0 +1,8 @@
+<div id='main-login'>
+  <h2 id="title">Please log in to your bingo card service</h2>
+  <%= form_with url: "/login", :class => "pure-form pure-form-stacked" do |form| %>
+    <%= form.text_field :username, required: true, autofocus: true, placeholder: "Username", :class => "pure-input-1"%>
+    <%= form.password_field :password, required: true, placeholder: "Password", :class => "pure-input-1" %>
+    <%= form.submit "Log in", :class => "pure-button pure-button-primary" %>
+  <% end %>
+</div>

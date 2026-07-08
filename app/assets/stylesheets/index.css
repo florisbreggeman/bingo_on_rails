@@ -8,6 +8,24 @@
     border-radius: 0.5em;
 }
 
+#main-login {
+    max-width: 40em;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    padding: 2em;
+    border-radius: 0.5em;
+    background-color: #FFF;
+}
+
+@media (min-width: 40em){
+    #main-login {
+        left: 50%;
+        transform: translate(-50%, -30%);
+    }
+}
+
+
 body {
     background-color: #A8C;
 }
