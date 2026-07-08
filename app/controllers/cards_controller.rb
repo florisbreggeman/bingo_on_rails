@@ -4,12 +4,13 @@ class CardsController < ApplicationController
   end
 
   def show
-    store = cookies[:fields]
+    cookie_key = "fields_#{params[:id]}"
+    store = cookies[cookie_key]
     @card = Card.find(params[:id])
     if store == nil 
       @complete = @card.size >= 24
       ordering = @card.fields.shuffle
-      cookies[:fields] = ordering.map { |f| f.id }.join(",")
+      cookies[cookie_key] = ordering.map { |f| f.id }.join(",")
     else
       ordering = store.split(",").map { |s| s.to_i }.map { |i| Field.find(i) }
       @complete = true

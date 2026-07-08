@@ -9,11 +9,9 @@ const BACKGROUND_IMAGE = 'url("/bug.png")';
 
 function toggleBingoField(field, _event) {
   if(localStorage.getItem(field.id) === "true"){
-    console.log("yay")
     localStorage.setItem(field.id, "false")
     field.style.backgroundImage = ""
   } else { 
-    console.log("nay")
     localStorage.setItem(field.id, "true")
     field.style.backgroundImage = BACKGROUND_IMAGE;
   }
@@ -28,7 +26,9 @@ function processBingoField(field) {
   field.addEventListener("click", e => toggleBingoField(field, e))
 }
 
-let fields = document.getElementsByClassName("field")
-Array.from(fields).forEach(f => processBingoField(f))
 
+window.addEventListener("turbo:load", _e => {
+  let fields = document.getElementsByClassName("field")
+  Array.from(fields).forEach(f => processBingoField(f))
+});
 
