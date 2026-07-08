@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_05_184209) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_08_173214) do
   create_table "cards", charset: "latin1", collation: "latin1_swedish_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "free_space"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", default: 1, null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "fields", charset: "latin1", collation: "latin1_swedish_ci", force: :cascade do |t|
@@ -26,5 +28,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_184209) do
     t.index ["card_id"], name: "index_fields_on_card_id"
   end
 
+  create_table "sessions", charset: "latin1", collation: "latin1_swedish_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "ip_address"
+    t.datetime "updated_at", null: false
+    t.string "user_agent"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "users", charset: "latin1", collation: "latin1_swedish_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.string "password_digest", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  add_foreign_key "cards", "users"
   add_foreign_key "fields", "cards"
+  add_foreign_key "sessions", "users"
 end
