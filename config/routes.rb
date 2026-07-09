@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get "/card/:id", controller: "cards", action: :show
   get "/login", controller: "sessions", action: :login
   post "/login", controller: "sessions", action: :create
+  get "/whoami", controller: "sessions", action: :whoami
 end

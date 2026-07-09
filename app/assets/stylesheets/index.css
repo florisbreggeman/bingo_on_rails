@@ -67,6 +67,10 @@ body {
     color: #2DC920;
 }
 
+#notifications {
+    color: #E9322D;
+}
+
 .button-delete {
     color: #fff;
     background: #d44;
