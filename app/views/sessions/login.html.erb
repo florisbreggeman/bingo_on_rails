@@ -1,10 +1,8 @@
-<div id='main-login'>
-  <h2 id="title">Please log in to your bingo card service</h2>
-  <p id="notifications"><%= params[:alert] %></p>
-  <%= form_with url: "/login", :class => "pure-form pure-form-stacked" do |form| %>
-    <%= form.text_field :username, required: true, autofocus: true, placeholder: "Username", :class => "pure-input-1"%>
-    <%= form.password_field :password, required: true, placeholder: "Password", :class => "pure-input-1" %>
-    <%= form.hidden_field :location, value: params[:location] %>
-    <%= form.submit "Log in", :class => "pure-button pure-button-primary" %>
-  <% end %>
-</div>
+<h2 id="title">Please log in to your bingo card service</h2>
+<p id="notifications"><%= params[:alert] %></p>
+<%= form_with url: "/login", :class => "pure-form pure-form-stacked" do |form| %>
+  <%= form.text_field :username, required: true, autofocus: true, placeholder: "Username", :class => "pure-input-1"%>
+  <%= form.password_field :password, required: true, placeholder: "Password", :class => "pure-input-1" %>
+  <%= form.hidden_field :location, value: params[:location] %>
+  <%= form.submit "Log in", :class => "pure-button pure-button-primary" %>
+<% end %>

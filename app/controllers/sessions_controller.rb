@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  include Authentication
   allow_unauth only: %i[ login create ]
+  layout "login", only: [:login]
 
   def login
   end
@@ -30,6 +30,6 @@ class SessionsController < ApplicationController
   def logout
     Current.session.destroy
     cookies.delete(:session)
-    redirect_to "/" #TODO
+    redirect_to "/"  # TODO
   end
 end

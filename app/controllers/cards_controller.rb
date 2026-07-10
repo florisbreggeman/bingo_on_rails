@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  allow_unauth only: %i[ index show ]
+
   def index
     @cards = Card.all()
   end
@@ -18,7 +20,8 @@ class CardsController < ApplicationController
     @contents = ordering.map { |f| show_field(f) }
   end
 
-  def show_field(field)
-    return "<td class='field' id='field-#{field.id}'>#{field.contents}</td>"
-  end
+  private
+    def show_field(field)
+      return "<td class='field' id='field-#{field.id}'>#{field.contents}</td>"
+    end
 end
