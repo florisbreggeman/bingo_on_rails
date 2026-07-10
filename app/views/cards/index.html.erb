@@ -1,10 +1,24 @@
-<div id='main'>
-<h1>Welcome to my Bingo Website</h1>
-<p>Currently available bingo cards:</p>
-<ul>
-  <% @cards.each do |card| %>
-    <li><a href="/card/<%= card.id %>"><%= card.name %></a></li>
-  <% end %>
-</ul>
-</div>
+<div id='layout'>
+  <a href='#menu' id='menuLink' class='menu-link'>
+    <span>Menu</span>
+  </a>
+  <div id='menu'>
+    <div class='pure-menu'>
+     <span class='pure-menu-heading'>Bingo</span>
+      <ul class='pure-menu-list'>
+        <li class='pure-menu-item pure-menu-selected'><a href='#' class='pure-menu-link'>Cards</a></li>
+        <li class='pure-menu-item'><a href='/whoami' class='pure-menu-link'>Who am I?</a></li>
+      </ul>
+    </div>
+  </div>
 
+  <div id='main'>
+  <h1>Welcome to my Bingo Website</h1>
+  <p>Currently available bingo cards:</p>
+  <ul>
+    <% @cards.each do |card| %>
+      <li><a href="/card/<%= card.id %>"><%= card.name %></a></li>
+    <% end %>
+  </ul>
+  </div>
+</div>
