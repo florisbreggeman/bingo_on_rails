@@ -33,9 +33,18 @@
           <span class='pure-menu-heading'>Bingo</span>
           <ul class='pure-menu-list'>
             <% @menu_items.each do |item| %>
-              <li class='pure-menu-item <%= item[:selected] ? "pure-menu-selected" : ""  %>'>
-                <a href='<%= item[:path] %>' class='pure-menu-link'><%= item[:title] %></a>
-              </li>
+              <% if item[:method] == "get" %>
+                <li class='pure-menu-item <%= item[:selected] ? "pure-menu-selected" : "" %>'>
+                  <a href='<%= item[:path] %>' class='pure-menu-link'><%= item[:title] %></a>
+                </li>
+              <% elsif item[:method] == "post" %>
+                <li class='pure-menu-item'>
+                  <%= form_with url: "/logout", :id => "logout-form" do |form| %>
+                    <!-- the submit button for this form has to be an <a> in order for the styling to work -->
+                    <a class='pure-menu-link' onclick='document.getElementById("logout-form").requestSubmit()'><%= item[:title] %></a>
+                  <% end %>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         </div>

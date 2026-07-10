@@ -17,6 +17,7 @@ module Authentication
       session_cookie = cookies.signed[:session]
       if session_cookie != nil
         session = Session.find_by(id: session_cookie)
+        Current.session = session
         Current.user = session.user
       end
     end

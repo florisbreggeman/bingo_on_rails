@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def set_menu_items
     menu_items_always = [{title: "All Cards", path: "/"}]
     menu_items_unauth = [{title: "Log in", path: "/login?location=#{CGI.escape request.path}"}]
-    menu_items_auth = [{title: "Who am I?", path: "/whoami"}]
+    menu_items_auth = [{title: "Who am I?", path: "/whoami"}, {title: "Log out", path: "/logout", method: "post"}]
 
     if Current.user == nil
       @menu_items = menu_items_always + menu_items_unauth
@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
       else
         item[:selected] = false
       end
+      item[:method] ||= "get"
     end
   end
 end
