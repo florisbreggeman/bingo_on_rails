@@ -24,7 +24,7 @@ module Authentication
 
     def require_authentication
       if Current.user == nil
-        redirect_to action: "login", location: request.path
+        redirect_to action: "login", controller: "sessions", location: request.path
       end
     end
 
