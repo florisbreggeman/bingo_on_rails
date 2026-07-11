@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   post "/login", controller: "sessions", action: :create
   get "/whoami", controller: "sessions", action: :whoami
   post "/logout", controller: "sessions", action: :logout
+  get "/new", controller: "cards", action: :new
+  post "/new", controller: "cards", action: :create
 end

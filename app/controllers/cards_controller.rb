@@ -19,6 +19,19 @@ class CardsController < ApplicationController
     @contents = ordering.map { |f| show_field(f) }
   end
 
+  def new
+  end
+
+  def create
+    card = Card.new
+    card.user_id = Current.user.id
+    card.name = params[:name]
+    card.free_space = params[:free_space]
+    card.save
+
+    redirect_to "/card/#{card.id}"
+  end
+
   private
     def show_field(field)
       return "<td class='field' id='field-#{field.id}'>#{field.contents}</td>"
