@@ -14,9 +14,13 @@ Rails.application.routes.draw do
 
   get "/card/:id", controller: "cards", action: :show
   get "/card/:id/edit", controller: "cards", action: :edit
-  post "card/:id/edit", controller: "cards", action: :change
+  post "/card/:id/edit", controller: "cards", action: :change
+
+  get "/card/:id/fields", controller: "fields", action: :get_all
+
   get "/new", controller: "cards", action: :new
   post "/new", controller: "cards", action: :create
+
 
   get "/login", controller: "sessions", action: :login
   post "/login", controller: "sessions", action: :create
