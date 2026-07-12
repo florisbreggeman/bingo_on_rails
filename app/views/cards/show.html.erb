@@ -1,6 +1,12 @@
-<div id='main'>
 <h1><%= @card.name %></h1>
-<p>Created at: <%= @card.created_at %>. Updated at: <%= @card.created_at %></p>
+<div class="pure-g">
+  <p class="updated pure-u-4-5">Last updated at: <%= @card.created_at %></p>
+  <% if Current.user != nil and Current.user.id == @card.user_id %>
+    <div class="pure-u-1-5">
+      <a class="pure-button" href="/card/<%= @card.id %>/edit">Edit</a>
+    </div>
+  <% end %>
+</div>
 
 <% if @complete %>
   <table class='card'>
@@ -20,5 +26,4 @@
 <% else %>
   <p>Sorry, this Bingo card is not yet complete</p>
 <% end %>
-</div>
 

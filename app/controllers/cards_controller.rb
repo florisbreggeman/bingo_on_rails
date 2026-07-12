@@ -1,6 +1,9 @@
 class CardsController < ApplicationController
   allow_unauth only: %i[ index show ]
 
+  include Authorisation
+  no_authorisation only: %i[ index show new create ]
+
   def index
     @cards = Card.all()
   end
@@ -22,6 +25,9 @@ class CardsController < ApplicationController
   def new
   end
 
+  def edit
+  end
+
   def create
     card = Card.new
     card.user_id = Current.user.id
@@ -30,6 +36,13 @@ class CardsController < ApplicationController
     card.save
 
     redirect_to "/card/#{card.id}"
+  end
+
+  def change
+    @card.name = params[:name]
+    @card.free_space = params[:free_space]
+    @card.save
+    redirect_to "/card/#{@card.id}"
   end
 
   private

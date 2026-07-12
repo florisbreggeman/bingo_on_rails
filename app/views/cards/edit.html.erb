@@ -1,0 +1,10 @@
+<h2>Edit <%= @card.name %></h2>
+<%= form_with url: request.path, :class => "pure-form pure-form-stacked" do |form| %>
+  <label for="name_field">Card Title</label>
+  <%= form.text_field :name, required: true, autofocus: true, value: @card.name, :class => "pure-input-1", :id => "name_field" %>
+  <label for="free_space_field">Free Space</label>
+  <%= form.text_field :free_space, required: true, value: @card.free_space, :class => "pure-input-1", :id => "free_space_field" %>
+  <%= form.submit "Edit card", :class => "pure-button pure-button-primary" %>
+<% end %>
+
+

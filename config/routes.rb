@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   root "cards#index"
 
   get "/card/:id", controller: "cards", action: :show
+  get "/card/:id/edit", controller: "cards", action: :edit
+  post "card/:id/edit", controller: "cards", action: :change
+  get "/new", controller: "cards", action: :new
+  post "/new", controller: "cards", action: :create
+
   get "/login", controller: "sessions", action: :login
   post "/login", controller: "sessions", action: :create
   get "/whoami", controller: "sessions", action: :whoami
   post "/logout", controller: "sessions", action: :logout
-  get "/new", controller: "cards", action: :new
-  post "/new", controller: "cards", action: :create
 end

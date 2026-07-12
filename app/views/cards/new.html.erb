@@ -1,7 +1,9 @@
 <h2>Create a new bingo card</h2>
 <%= form_with url: "/new", :class => "pure-form pure-form-stacked" do |form| %>
-  <%= form.text_field :name, required: true, autofocus: true, placeholder: "Card Title", :class => "pure-input-1" %>
-  <%= form.text_field :free_space, required: true, placeholder: "Free space text", :class => "pure-input-1" %>
+  <label for="name_field">Card Title</label>
+  <%= form.text_field :name, required: true, autofocus: true, placeholder: "Card Title", :class => "pure-input-1", :id => "name_field" %>
+  <label for="free_space_field">Free Space</label>
+  <%= form.text_field :free_space, required: true, placeholder: "Free space text", :class => "pure-input-1", :id => "free_space_field" %>
   <p>You can add fields once the card has been created</p>
   <%= form.submit "Create card", :class => "pure-button pure-button-primary" %>
 <% end %>
