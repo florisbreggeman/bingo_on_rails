@@ -9,9 +9,10 @@ class CardsController < ApplicationController
   end
 
   def show
-    cookie_key = "fields_#{params[:id]}"
+    # TODO if the card has been edited in the meantime, we should discard the cookie!
+    cookie_key = "fields_#{params[:card_id]}"
     store = cookies[cookie_key]
-    @card = Card.find(params[:id])
+    @card = Card.find(params[:card_id])
     @complete = @card.size >= 24
     if store == nil 
       ordering = @card.fields.shuffle
@@ -26,6 +27,7 @@ class CardsController < ApplicationController
   end
 
   def edit
+    @card = Current.card
   end
 
   def create
@@ -39,10 +41,10 @@ class CardsController < ApplicationController
   end
 
   def change
-    @card.name = params[:name]
-    @card.free_space = params[:free_space]
-    @card.save
-    redirect_to "/card/#{@card.id}"
+    Current.card.name = params[:name]
+    Current.card.free_space = params[:free_space]
+    Current.card.save
+    redirect_to "/card/#{Current.card.id}"
   end
 
   private

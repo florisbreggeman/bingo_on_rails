@@ -87,26 +87,74 @@ function onEnter(field, fun){
   })
 }
 
+function editField(element, container, field_id){
+  let card_id = container.getAttribute("card_id");
+  let contents = element.value
+  apiCall("/card/" + card_id + "/fields/" + field_id, "PATCH", {"contents": contents}, (_res) => buildFieldEditList(container), (res, status) => console.warn(status, res));
+  //TODO give the user any feedback this just happened
+}
+
+function deleteField(container, field_id){
+  let card_id = container.getAttribute("card_id");
+  apiCall("/card/" + card_id + "/fields/" + field_id, "DELETE", {}, (_res) => buildFieldEditList(container), (res, status) => console.warn(status, res));
+}
+
 function buildFieldEditList(container) {
+  let card_id = container.getAttribute("card_id")
+
   function onSuccess(fields){
     removeAllChildNodes(container)
     fields.forEach( item => {
-      let element = document.createElement('li');
-      element.classList.add('pure-form');
-      element.classList.add('pure-form-aligned');
+      let element = document.createElement("li");
+      element.classList.add("pure-form");
       
-      let input = document.createElement('input');
-      input.classList.add('pure-input');
-      input.classList.add('pure-input-1');
+      let input_div = document.createElement("div");
+      input_div.classList.add("pure-u-3-4");
+      let input = document.createElement("input");
+      input.classList.add("pure-input-1");
       input.type = "text";
-      input.value = item.contents
+      input.value = item.contents;
+      input_div.appendChild(input);
 
-      element.appendChild(input)
-      container.appendChild(element)
-    })
+
+      let edit_button_div = document.createElement("div");
+      edit_button_div.classList.add("pure-u-1-8");
+      let edit_button = document.createElement("button");
+      edit_button.classList.add("pure-button");
+      edit_button.classList.add("pure-input-1");
+      edit_button.appendChild(document.createTextNode("Edit"));
+      edit_button.addEventListener("click", (_e) => editField(input, container, item.id));
+      onEnter(input, (_e) => editField(input, container, item.id));
+      edit_button_div.appendChild(edit_button);
+
+      let delete_button_div = document.createElement("div");
+      delete_button_div.classList.add("pure-u-1-8");
+      let delete_button = document.createElement("button");
+      delete_button.classList.add("button-delete");
+      delete_button.classList.add("pure-button");
+      delete_button.classList.add("pure-input-1");
+      delete_button.appendChild(document.createTextNode("Delete"));
+      delete_button.addEventListener("click", (_e) => deleteField(container, item.id));
+      delete_button_div.appendChild(delete_button);
+
+      element.appendChild(input_div);
+      element.appendChild(edit_button_div);
+      element.appendChild(delete_button_div);
+      container.appendChild(element);
+    });
+
+    let how_many = document.getElementById("how-many");
+    removeAllChildNodes(how_many);
+    if(fields.length < 24){
+      // fun fact: if you don't put the parenthesis here, text will start with "NaN fields"... js operator precedence continues to be a mystery
+      let text = "Add " + (24 - fields.length) + " fields to make this card playable";
+      how_many.appendChild(document.createTextNode(text));
+    }else{
+      let text = "24 out of " + fields.length + " fields will be randomly selected for each player";
+      how_many.appendChild(document.createTextNode(text));
+    }
   }
 
-  let card_id = container.getAttribute("card_id")
   apiCall("/card/" + card_id + "/fields", "GET", null, onSuccess, (res, status) => console.warn(status, res));
 }
 
@@ -136,3 +184,4 @@ window.addEventListener("turbo:load", _e => {
   }
 });
 
+//TODO make menu work on mobile

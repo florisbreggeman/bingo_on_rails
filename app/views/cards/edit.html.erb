@@ -1,17 +1,27 @@
 <h2>Edit <%= @card.name %></h2>
-<%= form_with url: request.path, :class => "pure-form pure-form-stacked" do |form| %>
-  <label for="name_field">Card Title</label>
-  <%= form.text_field :name, required: true, autofocus: true, value: @card.name, :class => "pure-input-1", :id => "name_field" %>
-  <label for="free_space_field">Free Space</label>
-  <%= form.text_field :free_space, required: true, value: @card.free_space, :class => "pure-input-1", :id => "free_space_field" %>
-  <%= form.submit "Edit card", :class => "pure-button pure-button-primary" %>
+<%= form_with url: request.path, :class => "pure-form pure-form-aligned" do |form| %>
+  <fieldset>
+    <div class="pure-control-group">
+      <label for="name_field">Card Title</label>
+      <%= form.text_field :name, required: true, autofocus: true, value: @card.name, :class => "pure-input-1-2", :id => "name_field" %>
+    </div>
+    <div class="pure-control-group">
+      <label for="free_space_field">Free Space</label>
+      <%= form.text_field :free_space, required: true, value: @card.free_space, :class => "pure-input-1-2", :id => "free_space_field" %>
+    </div>
+    <div class="pure-control-group">
+      <%= form.submit "Edit card", :class => "pure-button pure-button-primary" %>
+    </div>
+  </fieldset>
 <% end %>
 
 <h2>Fields</h2>
-<div class="pure-form pure-form-aligned">
+<div class="pure-form">
   <input type="text" class="pure-input pure-input-3-4" id="fields-add-text" placeholder="New Field..."></input>
   <button class="pure-button pure-button-primary" id="fields-add-button" card_id="<%= @card.id %>">Add Field</button>
 </div>
+
+<p id="how-many"></p> <!-- TODO add button to play card (if complete) -->
 
 <ol id="fields-container" card_id="<%= @card.id %>"></ol>
 </script>

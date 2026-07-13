@@ -25,7 +25,6 @@
     }
 }
 
-
 body {
     background-color: #A8C;
 }
@@ -71,7 +70,7 @@ body {
     color: #E9322D;
 }
 
-.button-delete {
+button.button-delete {
     color: #fff;
     background: #d44;
 }

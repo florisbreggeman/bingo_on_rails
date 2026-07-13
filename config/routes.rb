@@ -12,12 +12,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "cards#index"
 
-  get "/card/:id", controller: "cards", action: :show
-  get "/card/:id/edit", controller: "cards", action: :edit
-  post "/card/:id/edit", controller: "cards", action: :change
+  get "/card/:card_id", controller: "cards", action: :show
+  get "/card/:card_id/edit", controller: "cards", action: :edit
+  post "/card/:card_id/edit", controller: "cards", action: :change
 
-  get "/card/:id/fields", controller: "fields", action: :get_all
-  put "/card/:id/fields", controller: "fields", action: :new
+  get "/card/:card_id/fields", controller: "fields", action: :get_all
+  put "/card/:card_id/fields", controller: "fields", action: :new
+  patch "/card/:card_id/fields/:field_id", controller: "fields", action: :edit
+  delete "/card/:card_id/fields/:field_id", controller: "fields", action: :delete
 
   get "/new", controller: "cards", action: :new
   post "/new", controller: "cards", action: :create
