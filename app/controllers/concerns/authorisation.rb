@@ -14,6 +14,7 @@ module Authorisation
   private
 
     def require_authorisation
+      # TODO This should be part of the Current object
       @card = Card.find_by(params[:id])
       if @card == nil or @card.user_id != Current.user.id
         render status: 403, file: "#{Rails.root}/public/403.html", layout: false

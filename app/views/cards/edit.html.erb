@@ -7,5 +7,11 @@
   <%= form.submit "Edit card", :class => "pure-button pure-button-primary" %>
 <% end %>
 
-<ul id="fields-container" card_id="<%= @card.id %>"></ul>
+<h2>Fields</h2>
+<div class="pure-form pure-form-aligned">
+  <input type="text" class="pure-input pure-input-3-4" id="fields-add-text" placeholder="New Field..."></input>
+  <button class="pure-button pure-button-primary" id="fields-add-button" card_id="<%= @card.id %>">Add Field</button>
+</div>
+
+<ol id="fields-container" card_id="<%= @card.id %>"></ol>
 </script>

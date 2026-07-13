@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "/card/:id/edit", controller: "cards", action: :change
 
   get "/card/:id/fields", controller: "fields", action: :get_all
+  put "/card/:id/fields", controller: "fields", action: :new
 
   get "/new", controller: "cards", action: :new
   post "/new", controller: "cards", action: :create

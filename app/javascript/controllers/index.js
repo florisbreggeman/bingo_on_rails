@@ -3,6 +3,8 @@ import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
 
+// TODO figure out how to load javascript from separate files
+
 const BACKGROUND_IMAGE = 'url("/bug.png")';
 
 // To my great disappointment, localStorage only supports strings...
@@ -28,9 +30,15 @@ function processBingoField(field) {
 
 
 function apiCall(path, method, body, onSuccess, onError=console.warn) {
+  if(method !== "GET" && typeof(body) === "object"){
+    let token_name = document.getElementsByName("csrf-param")[0].content
+    let token = document.getElementsByName("csrf-token")[0].content
+    body[token_name] = token
+  }
+
   function transferComplete() {
     try {
-      if (this.getResponseHeader('content-type').includes("application/json")) {
+      if (this.getResponseHeader('content-type') !== null && this.getResponseHeader('content-type').includes("application/json")) {
        var res = JSON.parse(this.responseText);
       } else {
        var res = this.responseText;
@@ -65,8 +73,23 @@ function apiCall(path, method, body, onSuccess, onError=console.warn) {
   }
 }
 
+function removeAllChildNodes(parent){
+  while(parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+function onEnter(field, fun){
+  field.addEventListener("keydown", function(e){
+    if(e.code === "Enter"){
+      fun(e);
+    }
+  })
+}
+
 function buildFieldEditList(container) {
   function onSuccess(fields){
+    removeAllChildNodes(container)
     fields.forEach( item => {
       let element = document.createElement('li');
       element.classList.add('pure-form');
@@ -87,6 +110,11 @@ function buildFieldEditList(container) {
   apiCall("/card/" + card_id + "/fields", "GET", null, onSuccess, (res, status) => console.warn(status, res));
 }
 
+function addField(card_id) {
+  let contents = document.getElementById("fields-add-text").value
+  apiCall("/card/" + card_id + "/fields", "PUT", {"contents": contents}, (_res) => buildFieldEditList(document.getElementById("fields-container")), (res, status) => console.warn(status, res))
+}
+
 window.addEventListener("turbo:load", _e => {
   let fields = document.getElementsByClassName("field");
   Array.from(fields).forEach(f => processBingoField(f));
@@ -94,6 +122,17 @@ window.addEventListener("turbo:load", _e => {
   let fields_container = document.getElementById("fields-container");
   if(fields_container !== null){
     buildFieldEditList(fields_container)
+  }
+
+  let fields_add_button = document.getElementById("fields-add-button");
+  let fields_add_text = document.getElementById("fields-add-text");
+  if(fields_add_button !== null){
+    let card_id = fields_add_button.getAttribute("card_id");
+    let f = function(_e){
+      addField(card_id);
+    }
+    fields_add_button.addEventListener("click", f)
+    onEnter(fields_add_text, f)
   }
 });
 

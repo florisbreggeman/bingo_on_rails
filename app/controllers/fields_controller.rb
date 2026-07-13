@@ -5,4 +5,8 @@ class FieldsController < ApplicationController
     render json: @card.fields
   end
 
+  def new
+    @card.add_field(params["contents"])
+  end
+
 end
