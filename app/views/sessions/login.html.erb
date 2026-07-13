@@ -1,4 +1,4 @@
-<h2 id="title">Please log in to your bingo card service</h2>
+<h2 id="title">Please log in to Bingo on Rails</h2>
 <p id="notifications"><%= params[:alert] %></p>
 <%= form_with url: "/login", :class => "pure-form pure-form-stacked" do |form| %>
   <%= form.text_field :username, required: true, autofocus: true, placeholder: "Username", :class => "pure-input-1"%>

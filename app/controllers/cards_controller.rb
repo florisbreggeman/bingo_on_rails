@@ -5,6 +5,7 @@ class CardsController < ApplicationController
   no_authorisation only: %i[ index show new create ]
 
   def index
+    # TODO filter out incomplete cards
     @cards = Card.all()
   end
 
