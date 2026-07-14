@@ -149,9 +149,11 @@ function buildFieldEditList(container) {
       // fun fact: if you don't put the parenthesis here, text will start with "NaN fields"... js operator precedence continues to be a mystery
       let text = "Add " + (24 - fields.length) + " fields to make this card playable";
       how_many.appendChild(document.createTextNode(text));
+      document.getElementById("play-button").style.display = "none";
     }else{
       let text = "24 out of " + fields.length + " fields will be randomly selected for each player";
       how_many.appendChild(document.createTextNode(text));
+      document.getElementById("play-button").style.display = "block";
     }
   }
 

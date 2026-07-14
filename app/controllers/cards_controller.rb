@@ -18,11 +18,14 @@ class CardsController < ApplicationController
   def show
     # TODO if the card has been edited in the meantime, we should discard the cookie!
     cookie_key = "fields_#{params[:card_id]}"
+    cookie_update_key = "fields_#{params[:card_id]}_update"
     store = cookies[cookie_key]
+    store_update = cookies[cookie_update_key]
     @card = Card.find(params[:card_id])
-    if store == nil 
+    if store == nil or store_update == nil or @card.updated_at > Time.at(Integer(store_update))
       ordering = @card.fields.shuffle
-      cookies[cookie_key] = ordering.map { |f| f.id }.join(",")
+      cookies[cookie_key] = ordering.map{ |f| f.id }.join(",")
+      cookies[cookie_update_key] = Time.now.to_i
     else
       ordering = store.split(",").map { |s| s.to_i }.map { |i| Field.find(i) }
     end

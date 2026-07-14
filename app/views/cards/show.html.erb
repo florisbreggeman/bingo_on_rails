@@ -1,6 +1,6 @@
 <h1><%= @card.name %></h1>
 <div class="pure-g">
-  <p class="updated pure-u-4-5">Last updated at: <%= @card.created_at %></p>
+  <p class="updated pure-u-4-5">Last updated at: <%= @card.updated_at %></p>
   <% if Current.user&.id == @card.user_id %>
     <div class="pure-u-1-5">
       <a class="pure-button" href="/card/<%= @card.id %>/edit">Edit</a>

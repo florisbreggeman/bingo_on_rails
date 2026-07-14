@@ -21,7 +21,14 @@
   <button class="pure-button pure-button-primary" id="fields-add-button" card_id="<%= @card.id %>">Add Field</button>
 </div>
 
-<p id="how-many"></p> <!-- TODO add button to play card (if complete) -->
+<div class="pure-g">
+  <div class="pure-u-4-5">
+    <p id="how-many"</p> 
+  </div>
+  <div class="pure-u-1-5">
+    <a id="play-button" class="pure-button" style="display: none" href="/card/<%= @card.id %>">Play Card</a>
+  </div>
+</div>
 
 <ol id="fields-container" card_id="<%= @card.id %>"></ol>
 </script>

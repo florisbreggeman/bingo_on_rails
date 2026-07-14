@@ -1,5 +1,7 @@
 class FieldsController < ApplicationController
   include Authorisation
+  before_action :check_authorisation, except: %i[ get_all new ]
+  after_action :update_card_time, only: %i[ new delete ]
 
   # This controller only does JSON!
 
@@ -12,13 +14,12 @@ class FieldsController < ApplicationController
   end
 
   def edit
-    field = Field.find(params[:field_id])
-    field.contents = params["contents"]
-    field.save
+    Current.field.contents = params["contents"]
+    Current.field.save
   end
 
   def delete
-    Field.destroy(params[:field_id])
+    Current.field.destroy
   end
 
   private
@@ -30,5 +31,11 @@ class FieldsController < ApplicationController
         render status: 403, json: {"message": "forbidden"}
       end
     end
+
+    def update_card_time
+      Current.card.updated_at = Time.now
+      Current.card.save
+    end
+
 
 end
