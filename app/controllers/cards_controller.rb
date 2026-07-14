@@ -2,11 +2,17 @@ class CardsController < ApplicationController
   allow_unauth only: %i[ index show ]
 
   include Authorisation
-  no_authorisation only: %i[ index show new create ]
+  no_authorisation only: %i[ index my show new create ]
 
   def index
-    # TODO filter out incomplete cards
-    @cards = Card.all()
+    @cards = Card.all().select{|card| card.complete}
+    @heading = "Currently available bingo cards"
+  end
+
+  def my
+    @cards = Card.all().select{|card| card.user_id == Current.user.id}
+    @heading = "Your bingo cards:"
+    render :index
   end
 
   def show
@@ -14,7 +20,6 @@ class CardsController < ApplicationController
     cookie_key = "fields_#{params[:card_id]}"
     store = cookies[cookie_key]
     @card = Card.find(params[:card_id])
-    @complete = @card.size >= 24
     if store == nil 
       ordering = @card.fields.shuffle
       cookies[cookie_key] = ordering.map { |f| f.id }.join(",")

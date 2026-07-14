@@ -1,14 +1,14 @@
 <h1><%= @card.name %></h1>
 <div class="pure-g">
   <p class="updated pure-u-4-5">Last updated at: <%= @card.created_at %></p>
-  <% if Current.user != nil and Current.user.id == @card.user_id %>
+  <% if Current.user&.id == @card.user_id %>
     <div class="pure-u-1-5">
       <a class="pure-button" href="/card/<%= @card.id %>/edit">Edit</a>
     </div>
   <% end %>
 </div>
 
-<% if @complete %>
+<% if @card.complete %>
   <table class='card'>
     <tbody>
       <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>

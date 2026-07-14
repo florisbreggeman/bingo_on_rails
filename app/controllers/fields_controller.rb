@@ -21,4 +21,14 @@ class FieldsController < ApplicationController
     Field.destroy(params[:field_id])
   end
 
+  private
+    def check_authorisation
+      field = Field.find(params[:field_id])
+      if field&.card_id == Current.card.id
+        Current.field = field
+      else
+        render status: 403, json: {"message": "forbidden"}
+      end
+    end
+
 end

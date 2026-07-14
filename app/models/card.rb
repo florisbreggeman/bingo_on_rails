@@ -17,4 +17,8 @@ class Card < ApplicationRecord
     return self.fields.length
   end
 
+  def complete
+    return self.size >= 24
+  end
+
 end

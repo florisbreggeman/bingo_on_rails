@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "cards#index"
+  get "/my", controller: "cards", action: :my
 
   get "/card/:card_id", controller: "cards", action: :show
   get "/card/:card_id/edit", controller: "cards", action: :edit
