@@ -169,3 +169,6 @@ server {
 
 ```
 
+## Use of Generative AI
+
+No Generative AI was used in the creation of this codebase.

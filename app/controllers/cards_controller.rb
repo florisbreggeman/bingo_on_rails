@@ -16,7 +16,6 @@ class CardsController < ApplicationController
   end
 
   def show
-    # TODO if the card has been edited in the meantime, we should discard the cookie!
     cookie_key = "fields_#{params[:card_id]}"
     cookie_update_key = "fields_#{params[:card_id]}_update"
     store = cookies[cookie_key]
