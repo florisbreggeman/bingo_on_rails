@@ -121,7 +121,7 @@ ExecStartPre=/usr/local/bin/bundle exec rake assets:precompile
 WantedBy=multi-user.target
 ```
 
-[See the Puma documentation for options for the <bind target>](https://github.com/puma/puma#binding-tcp--sockets). I recommend binding to a Unix socket for security reasons.
+[See the Puma documentation for options for the `<bind target>`](https://github.com/puma/puma#binding-tcp--sockets). I recommend binding to a Unix socket for security reasons.
 
 In order to start the service, use `systemctl daemon-reload; systemctl start bingo_on_rails`.
 Use `journalctl -u bingo_on_rails` to get logging.
