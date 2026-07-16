@@ -81,15 +81,15 @@ In order to ensure all the files and dependencies you need are present:
 
 1. Install your favourite PostgreSQL or MySQL server
 2. Create 4 databases:
-  1. `bingo_on_rails_production`
-  2. `bingo_on_rails_production_queue`
-  3. `bingo_on_rails_production_cache`
-  4. `bingo_on_rails_production_cable`
+    1. `bingo_on_rails_production`
+    2. `bingo_on_rails_production_queue`
+    3. `bingo_on_rails_production_cache`
+    4. `bingo_on_rails_production_cable`
 3. Create a database user with full privileges on all of these databases
 4. Update `config/database.rb`:
-  1. Enter the correct connection details and credentials at the top of the file
-  2. Comment out the "development" configuration
-  3. Uncomment the "production" configuration near the bottom of the file, and make any adjustments that may be necessary
+    1. Enter the correct connection details and credentials at the top of the file
+    2. Comment out the "development" configuration
+    3. Uncomment the "production" configuration near the bottom of the file, and make any adjustments that may be necessary
 5. As the dedicated user, run `bundle exec rails db:migrate`
 
 At this point, you can (as the dedicated user) run `RAILS_ENV=production bundle exec rails server` to test your work.
@@ -168,6 +168,30 @@ server {
 }
 
 ```
+
+## Roadmap
+
+### Must Have
+
+- Account Managament
+  - Change own password
+  - Distinguish between admin/non-admin users
+  - Add/remove users
+  - Set users to admin/non-admin
+  - Password recovery (via administrative password reset)
+- Giving the user feedback when editing a field has taken effect
+
+### Should Have
+
+- Splitting javascript over multiple files
+- Splitting CSS over multiple files, and only including those which are necessary for a given page
+- Better redirects for the logout button
+
+### Wishlist
+
+- Javascript which sprays confetti when you get bingo
+- Sending a notification to all concurrent viewers of a card when one player gets bingo
+  - Possible using websockets?
 
 ## Use of Generative AI
 
