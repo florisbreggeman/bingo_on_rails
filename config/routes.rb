@@ -30,4 +30,7 @@ Rails.application.routes.draw do
   post "/login", controller: "sessions", action: :create
   get "/whoami", controller: "sessions", action: :whoami
   post "/logout", controller: "sessions", action: :logout
+
+  get "/change_password", controller: "users", action: :edit_password
+  post "/change_password", controller: "users", action: :change_password
 end

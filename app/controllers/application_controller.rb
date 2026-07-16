@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
     menu_items_auth = [
       {title: "My cards", path: "/my"},
       {title: "Who am I?", path: "/whoami"}, 
-      {title: "New Card", path: "/new"}, 
+      {title: "New Card", path: "/new"},
+      {title: "Change Password", path: "/change_password"},
       {title: "Log out", path: "/logout", method: "post"}
     ]
 

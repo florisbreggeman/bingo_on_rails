@@ -174,7 +174,6 @@ server {
 ### Must Have
 
 - Account Managament
-  - Change own password
   - Distinguish between admin/non-admin users
   - Add/remove users
   - Set users to admin/non-admin
@@ -183,9 +182,14 @@ server {
 
 ### Should Have
 
+- EU-compliant cookie warning
 - Splitting javascript over multiple files
 - Splitting CSS over multiple files, and only including those which are necessary for a given page
 - Better redirects for the logout button
+
+### Could Have
+
+- Authentication via OpenID Connect
 
 ### Wishlist
 
